@@ -1,0 +1,10 @@
+CACHING :
+catching is a very easy way improve the "read" performance of our application.
+
+Anytime we refresh a page in our browser, we are issuing two request to the db.
+
+The browser first visits the site , then the app loads in the browser. the app makes a request to the backend to figure out who the current user is and also retrieve a list of items that belongs to the user.
+
+The request is received by our express api, the it sends the request to the respective route handler
+
+Then the route handlers sees the incoming request and uses the mongoose library to reach out to mongodb and retrieves some amount of information
