@@ -1,6 +1,8 @@
 CACHING :
 catching is a very easy way improve the "read" performance of our application.
 
+Caching refers to the process of storing data in a temporary storage area (called a cache) so that future requests for that data can be served faster
+
 Anytime we refresh a page in our browser, we are issuing two request to the db.
 
 The browser first visits the site , then the app loads in the browser. the app makes a request to the backend to figure out who the current user is and also retrieve a list of items that belongs to the user.
@@ -8,3 +10,5 @@ The browser first visits the site , then the app loads in the browser. the app m
 The request is received by our express api, the it sends the request to the respective route handler
 
 Then the route handlers sees the incoming request and uses the mongoose library to reach out to mongodb and retrieves some amount of information
+
+anytime mongoose issues a query, it will first go over to the cache server, the cache checks if the query has been issued before, if it hasn't it sends it over to mongodb and mongodb issues thw query, the query goes back to the catch server, the catch will then store the result of that query, the catch then takes the response and sends it back to mongoose, the mongoose gives to express, the express gives it to browser
