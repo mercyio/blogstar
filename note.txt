@@ -105,3 +105,6 @@ THE FLOW
 
     return result;
  }
+
+
+ setting up a more reuseable caching solution
