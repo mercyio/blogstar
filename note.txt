@@ -36,3 +36,38 @@ to retrieve the value we use
 client.get('hi', (err, value) => console.log(value))
 
 client.get('hi',console.log)
+
+hget (hashGet)
+hset(hashSet)
+
+for storing a nested object to a dataset in redis 
+
+const redisValue = {
+  (key)      spanish: {
+  (values)      red: 'rojo',
+                orange: 'naranja',
+                blue : "azul"
+    },
+    german: {
+        red : rot,
+        orange : "orange",
+        blue : "blau"
+    }
+}
+
+
+> client.hset('german', 'red', 'rot')
+true
+> client.hget('german', 'red', console.log)
+true
+> null rot
+
+
+
+we cannot store a plane js object inside redis, we can only store numbers and letters
+
+client.set('colors', JSON.stringify({red: 'rojo'}))
+
+client.get('hi', (err, value) => console.log(JSON.parse(value)))
+or
+ client.get('colors', console.log)
