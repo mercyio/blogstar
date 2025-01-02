@@ -12,3 +12,12 @@ The request is received by our express api, the it sends the request to the resp
 Then the route handlers sees the incoming request and uses the mongoose library to reach out to mongodb and retrieves some amount of information
 
 anytime mongoose issues a query, it will first go over to the cache server, the cache checks if the query has been issued before, if it hasn't it sends it over to mongodb and mongodb issues thw query, the query goes back to the catch server, the catch will then store the result of that query, the catch then takes the response and sends it back to mongoose, the mongoose gives to express, the express gives it to browser
+
+
+
+node redis
+
+
+node
+const redis = require('redis)
+const redisUrl = 'redis://127.0.0.1:6379
