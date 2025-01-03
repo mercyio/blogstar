@@ -24,11 +24,20 @@ mongoose.Query.prototype.exec = async function () {
 
     // if we do, return that
     if (cacheValue) {
-    console.log(cacheValue)
+        const doc = JSON.parse(cacheValue);
+        
+        Array.isArray(doc)
+            ? doc.map(d => new this.model(d))
+            : new this.model(doc);
+        
+        console.log(cacheValue)
+        return doc;
     }
 
     // otherwise issue the query and store the result in redis
 
     const result = await exec.apply(this, arguments);
+
+    client.set(key, JSON.stringify(result));
     console.log(result);
 };
