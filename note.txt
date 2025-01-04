@@ -18,6 +18,21 @@ anytime mongoose issues a query, it will first go over to the cache server, the 
 node redis
 
 
+
+
+
+
 node
-const redis = require('redis)
-const redisUrl = 'redis://127.0.0.1:6379
+const redis = require('redis')
+const redisUrl = 'redis://127.0.0.1:6379'
+const client = redis.createClient(redisUrl)
+
+client consist of a bunch of object items that allows us to manipulate with redis instance
+
+eg client.set('hi', 'there')
+this saves in the redis with KEY of hi, and VALUE of there.
+
+to retrieve the value we use
+client.get('hi', (err, value) => console.log(value))
+
+client.get('hi',console.log)
