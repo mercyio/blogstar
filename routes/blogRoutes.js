@@ -30,10 +30,16 @@ module.exports = app => {
 
    
     // if no we need to respond to request and update our cache to store the data
+    if (cacheBlog) {
+      console.log('serving from cache')
+      return res.send(JSON.parse(cacheBlog));
+    }
 
     const blogs = await Blog.find({ _user: req.user.id });
-
+    console.log('serving from mongodb')
     res.send(blogs);
+
+    client.set(req.user.id,JSON.stringify(blogs));
   });
 
   app.post('/api/blogs', requireLogin, async (req, res) => {

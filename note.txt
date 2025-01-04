@@ -71,3 +71,8 @@ client.set('colors', JSON.stringify({red: 'rojo'}))
 client.get('hi', (err, value) => console.log(JSON.parse(value)))
 or
  client.get('colors', console.log)
+
+
+
+to delete our redis contents
+ client.flushall()
