@@ -14,33 +14,39 @@ module.exports = app => {
   });
 
   app.get('/api/blogs', requireLogin, async (req, res) => {
-    const redis = require('redis');
-    const redisUrl = 'redis://127.0.0.1:6379';
-    const client = redis.createClient(redisUrl);
-    const util = require('util')
-    //  promisify : we can pass it into another function and it will return a new function
+    const blogs = await Blog.find({ _user: req.user.id });
 
-     // so we promisify the client.get function to return a new function instead of using the callback function method
+    res.send(blogs);
+  })
 
-    client.get = util.promisify(client.get);
+  // app.get('/api/blogs', requireLogin, async (req, res) => {
+  //   const redis = require('redis');
+  //   const redisUrl = 'redis://127.0.0.1:6379';
+  //   const client = redis.createClient(redisUrl);
+  //   const util = require('util')
+  //   //  promisify : we can pass it into another function and it will return a new function
+
+  //    // so we promisify the client.get function to return a new function instead of using the callback function method
+
+  //   client.get = util.promisify(client.get);
     
 
-    // check if we cached data in redis related to this query. if yes, then response to this request immediately
-    const cacheBlog =  await client.get(req.user.id);
+  //   // check if we cached data in redis related to this query. if yes, then response to this request immediately
+  //   const cacheBlog =  await client.get(req.user.id);
 
    
-    // if no we need to respond to request and update our cache to store the data
-    if (cacheBlog) {
-      console.log('serving from cache')
-      return res.send(JSON.parse(cacheBlog));
-    }
+  //   // if no we need to respond to request and update our cache to store the data
+  //   if (cacheBlog) {
+  //     console.log('serving from cache')
+  //     return res.send(JSON.parse(cacheBlog));
+  //   }
 
-    const blogs = await Blog.find({ _user: req.user.id });
-    console.log('serving from mongodb')
-    res.send(blogs);
+  //   const blogs = await Blog.find({ _user: req.user.id });
+  //   console.log('serving from mongodb')
+  //   res.send(blogs);
 
-    client.set(req.user.id,JSON.stringify(blogs));
-  });
+  //   client.set(req.user.id,JSON.stringify(blogs));
+  // });
 
   app.post('/api/blogs', requireLogin, async (req, res) => {
     const { title, content } = req.body;

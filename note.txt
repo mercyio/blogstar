@@ -76,3 +76,32 @@ or
 
 to delete our redis contents
  client.flushall()
+
+[
+TO SET EXPIRATION TIME
+We will be able to retrieve this value from redis but after 5 sec it disappears from redis and we wont be able to retrieve it again.
+
+ client.set('color', 'red', 'EX', 5)
+]
+
+
+
+THE FLOW
+
+ (check to see if this query has been executed)
+ query.exec = function (){
+    ( check to see if the query has been executed, and if it has, return the result right away)
+
+    client.get('query key)
+    if(result){
+        return result;
+    }
+
+    (otherwise issue the query as normal)
+    const result = runTheOriginalFunction();
+
+   (then save that value in the redis)
+    client.set('query key', result)
+
+    return result;
+ }
