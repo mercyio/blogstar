@@ -108,3 +108,10 @@ THE FLOW
 
 
  setting up a more reuseable caching solution 
+
+ unit testing : one piece of your app is working the way you expect
+
+ Integration testing : multiple units works together correctly
+
+ in this project, i used jest as my test runner. its what allows us from the command line andha make decesions about the way out application is behaving 
+ also, i am using puppeteer, ot is w hat is goimg to hrlp launch a chromium instance and interact with it from javascript

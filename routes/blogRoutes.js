@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const requireLogin = require('../middlewares/requireLogin');
-const { clearHash } = require('../services/cache')
-// const cleanCache = require('../middlewares/cleanCache')
+const { clearHash } = require('../services/cache');
+const cleanCache = require('../middlewares/cleanCache');
 
 const Blog = mongoose.model('Blog');
 
